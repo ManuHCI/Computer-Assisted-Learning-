@@ -52,6 +52,8 @@ Public Beta • Version 1.0 • MAMC, New Delhi
 
 Feedback and suggestions are welcome.
 
+**Project is funded by MRU (ICMR), MAMC, Nodal Officer - Dr. Bhupinder Kalra** 
+
 ## Developed by
 
 Designed and developed by
@@ -60,9 +62,10 @@ Designed and developed by
 
 **Professor of Pharmacology**
 
+Our 2nd Yr MAMC MBBS students HARSH PATEL and Dhruv Marmath contributed in developing Rabbit Eye experiment. 
+
 **Maulana Azad Medical College, New Delhi**
 
-with assistance from generative AI tools
 
 [LinkedIn profile](https://www.linkedin.com/in/manukumarshetty/)
 
