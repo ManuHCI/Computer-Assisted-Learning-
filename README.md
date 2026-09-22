@@ -62,7 +62,7 @@ Designed and developed by
 
 **Professor of Pharmacology**
 
-Our 2nd Yr MAMC MBBS students HARSH PATEL and Dhruv Marmath contributed in developing Rabbit Eye experiment. 
+Our 2nd Yr MAMC (MBBS Batch 24) students Harsh Patel and Dhruv Marmath contributed in developing Rabbit Eye experiment. 
 
 **Maulana Azad Medical College, New Delhi**
 
