@@ -1,1 +1,1 @@
-"""Optional advanced simulators bundled with the MAMC CAL suite."""
+"""Optional advanced simulators bundled with the Pharmacology CAL suite."""

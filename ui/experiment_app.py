@@ -171,7 +171,7 @@ class ExperimentApp:
     def __init__(self, root):
         self.root = root
         configure_application_display(self.root)
-        self.root.title("MAMC Pharmacology CAL Suite")
+        self.root.title("Virtual Pharmacology Laboratory")
         set_window_size(
             self.root, 980, 740, 620, 480,
             margin_x=60, margin_y=80, expand_large=True,
@@ -241,110 +241,6 @@ class ExperimentApp:
         grid.bind("<Configure>", arrange)
         grid.after_idle(arrange)
         return grid
-
-    def _legacy_show_landing_page(self):
-        # Color palette and fonts
-        primary_color = "#3498db"
-        secondary_color = "#2ecc71"
-        accent_color = "#9b59b6"
-        text_dark = "#2c3e50"
-        text_light = "#ecf0f1"
-        bg_color = "#f5f9fc"
-
-        self.clear_root()
-        self.root.configure(bg=bg_color)
-        footer_frame = tk.Frame(self.root, bg=text_dark)
-        footer_frame.pack(side="bottom", fill="x")
-        version_label = tk.Label(
-            footer_frame,
-            text="© 2025 Maulana Azad Medical College. Version 1.0",
-            font=("Segoe UI", 8), fg=text_light, bg=text_dark, pady=5,
-        )
-        version_label.pack()
-
-        main_frame = self.create_scrollable_body(bg_color, padx=20, pady=10)
-
-        top_frame = tk.Frame(main_frame, bg=bg_color,
-                             highlightbackground=primary_color,
-                             highlightthickness=2)
-        top_frame.pack(pady=15)
-        try:
-            logo_path = resource_path("assets", "mamc_logo.png")
-            original_image = Image.open(logo_path)
-            resized_image = original_image.resize((160, 160), Image.Resampling.LANCZOS)
-            self.logo_photo = ImageTk.PhotoImage(resized_image)
-            logo_label = tk.Label(top_frame, image=self.logo_photo, bg=bg_color, padx=15, pady=15)
-            logo_label.image = self.logo_photo
-            logo_label.pack()
-        except Exception as e:
-            logo_frame = tk.Frame(top_frame, bg=primary_color, width=160, height=160)
-            logo_frame.pack_propagate(False)
-            logo_frame.pack(padx=15, pady=15)
-            logo_text = tk.Label(logo_frame, text="MAMC\nLOGO", font=("Segoe UI", 18, "bold"),
-                                 fg=text_light, bg=primary_color)
-            logo_text.pack(expand=True)
-            print(f"Error loading image: {e}")
-
-        title_frame = tk.Frame(main_frame, bg=bg_color)
-        title_frame.pack(pady=10)
-        college_label = tk.Label(title_frame, text="Maulana Azad Medical College",
-                                  font=("Segoe UI", 24, "bold"), fg=primary_color,
-                                  bg=bg_color, wraplength=720, justify="center")
-        college_label.pack()
-        separator = tk.Frame(title_frame, height=2, width=400, bg=secondary_color)
-        separator.pack(pady=10)
-        dept_label = tk.Label(title_frame, text="Department of Pharmacology",
-                              font=("Segoe UI", 18, "bold"), fg=accent_color, bg=bg_color)
-        dept_label.pack(pady=(5, 0))
-        cal_frame = tk.Frame(title_frame, bg=secondary_color, padx=15, pady=8)
-        cal_frame.pack(pady=15)
-        cal_label = tk.Label(cal_frame, text="Computer Assisted Learning",
-                             font=("Segoe UI", 16, "bold"), fg=text_light, bg=secondary_color)
-        cal_label.pack()
-
-        designed_frame = tk.Frame(main_frame, bg=bg_color)
-        designed_frame.pack(pady=10)
-        designed_label = tk.Label(designed_frame, text="Designed and developed by",
-                                  font=("Georgia", 14, "italic"), fg=text_dark, bg=bg_color)
-        designed_label.pack(pady=5)
-
-        dev_frame = tk.Frame(main_frame, bg=bg_color)
-        dev_frame.pack(pady=10)
-        def create_developer_info(parent, name, title, column=0):
-            dev_container = tk.Frame(parent, bg=bg_color)
-            dev_container.grid(row=0, column=column, padx=20, pady=5)
-            name_color = accent_color if column == 1 else primary_color
-            name_label = tk.Label(dev_container, text=name, font=("Segoe UI", 12, "bold"),
-                                  fg=name_color, bg=bg_color)
-            name_label.pack()
-            title_label = tk.Label(dev_container, text=title, font=("Segoe UI", 11),
-                                   fg=text_dark, bg=bg_color)
-            title_label.pack()
-            dept_label = tk.Label(dev_container, text="Department of Pharmacology", font=("Segoe UI", 12),
-                                  fg=text_dark, bg=bg_color)
-            dept_label.pack()
-            college_label = tk.Label(dev_container, text="Maulana Azad Medical College, New Delhi", font=("Segoe UI", 12),
-                                     fg=text_dark, bg=bg_color)
-            college_label.pack()
-        #create_developer_info(dev_frame, "Dr. Shalini Chawla", "Director Professor", column=0)
-        create_developer_info(dev_frame, "Faculties and Residents", "Academic Year 2025-26", column=1)
-        #create_developer_info(dev_frame, "Dr. Bhupinder Singh Kalra", "Professor", column=2)
-
-        # Keep the primary action on screen even when a short laptop display
-        # needs to scroll the institutional/developer details above it.
-        button_frame = tk.Frame(
-            self.root, bg=bg_color,
-            highlightbackground="#d6e3ec", highlightthickness=1,
-        )
-        button_frame.pack(side="bottom", fill="x")
-        enter_button = tk.Button(button_frame, text="ENTER PORTAL", font=("Segoe UI", 16, "bold"),
-                                 bg=secondary_color, fg=text_light,
-                                 activebackground=primary_color, activeforeground=text_light,
-                                 relief="raised", bd=2, padx=20, pady=10, cursor="hand2",
-                                 command=self.show_main_menu)
-        enter_button.pack(pady=9)
-        enter_button.bind("<Enter>", lambda e: enter_button.config(bg=primary_color))
-        enter_button.bind("<Leave>", lambda e: enter_button.config(bg=secondary_color))
 
     def show_landing_page(self):
         """Reference-style CAL landing page with a screen-safe primary action."""
@@ -431,11 +327,9 @@ class ExperimentApp:
         credits = tk.Label(
             content,
             text=(
-                "Designed and developed by\n"
-                "Dr. Manu Kumar Shetty\n"
-                "Professor of Pharmacology\n"
-                "Maulana Azad Medical College, New Delhi\n"
-                "with assistance from generative AI tools"
+                "Developed by Dr. Manu Kumar Shetty\n"
+                "Department of Pharmacology\n"
+                "Maulana Azad Medical College, New Delhi"
             ),
             font=("Georgia", 11, "italic"), fg=text, bg=background,
             justify="center",
@@ -445,9 +339,8 @@ class ExperimentApp:
         contribution = tk.Label(
             content,
             text=(
-                "Contributed by the Faculties of the Department of Pharmacology\n"
-                "Maulana Azad Medical College, New Delhi  -  Academic Year 2025-26\n"
-                "Funded by MRU, MAMC  -  Nodal Officer: Dr. Bhupinder Kalra"
+                "Funded by MRU (ICMR), MAMC  -  Nodal Officer: Dr. Bhupinder Kalra\n"
+                "Principal Investigator: Dr. Shalini Chawla, Director Professor, MAMC"
             ),
             font=("Segoe UI", 9), fg=text, bg=background,
             justify="center",
@@ -492,7 +385,7 @@ class ExperimentApp:
         text = tk.Frame(header, bg="#173b57")
         text.pack(side="left", fill="x", expand=True)
         tk.Label(
-            text, text="MAMC, New Delhi", font=("Segoe UI", 8, "bold"),
+            text, text="Virtual Pharmacology Laboratory", font=("Segoe UI", 8, "bold"),
             bg="#173b57", fg="#9fc4dd", justify="left", anchor="w",
         ).pack(fill="x")
         title_label = tk.Label(text, text=title, font=("Segoe UI", 19, "bold"),
@@ -537,11 +430,11 @@ class ExperimentApp:
         self.clear_root()
         self.root.configure(bg="#eef4f8")
         self.page_header(
-            "MAMC Pharmacology CAL Suite",
+            "Virtual Pharmacology Laboratory",
             "Computer-assisted learning workspace",
         )
         tk.Label(self.root,
-                 text="MAMC, New Delhi  •  Academic CAL workspace",
+                 text="Virtual Pharmacology Laboratory  •  Academic CAL workspace",
                  font=("Segoe UI", 8), bg="#20394d", fg="#dce6ed",
                  pady=6).pack(fill="x", side="bottom")
         body = self.create_scrollable_body("#eef4f8", padx=28, pady=24)

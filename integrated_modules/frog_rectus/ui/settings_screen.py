@@ -109,7 +109,7 @@ class SettingsScreen(QWidget):
             "Computer-Assisted Learning software for MBBS Phase II<br/>"
             "Pharmacology practical demonstration.<br/><br/>"
             "NMC CBME Compliant • 3Rs Replacement<br/><br/>"
-            "<b>MAMC, New Delhi</b>"
+            "<b>Virtual Pharmacology Laboratory</b>"
         )
         about_label.setWordWrap(True)
         about_label.setStyleSheet(f"color: {TEXT_SECONDARY}; padding: 8px;")

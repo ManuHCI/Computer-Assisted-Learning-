@@ -20,7 +20,7 @@ class FrogRectusSimulation:
             font=("Segoe UI", 14, "bold"), bg="#E7EEF6", fg="#0D47A1",
         ).pack(side=tk.LEFT)
         tk.Label(
-            header, text="MAMC, New Delhi", font=("Segoe UI", 9, "bold"),
+            header, text="Virtual Pharmacology Laboratory", font=("Segoe UI", 9, "bold"),
             bg="#E7EEF6", fg="#526174",
         ).pack(side=tk.RIGHT)
 

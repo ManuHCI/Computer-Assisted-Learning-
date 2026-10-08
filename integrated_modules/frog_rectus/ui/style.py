@@ -27,7 +27,7 @@ FONT_BUTTON = 13
 # Keep institutional branding quiet on working screens so the experiment title
 # and controls remain the visual focus.  The home screen intentionally retains
 # the full department and college name as the application's front page.
-INSTITUTION_TEXT = "MAMC, New Delhi"
+INSTITUTION_TEXT = "Virtual Pharmacology Laboratory"
 INSTITUTION_LABEL_STYLE = f"""
 font-size: 10px;
 font-weight: 600;

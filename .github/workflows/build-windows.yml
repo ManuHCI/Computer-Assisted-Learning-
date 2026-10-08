@@ -58,7 +58,7 @@ jobs:
             --onefile `
             --windowed `
             --name $env:APP_BASENAME `
-            --icon "assets\mamc_logo.ico" `
+            --icon "assets\app_icon.ico" `
             --add-data "assets;assets" `
             --collect-submodules "integrated_modules.frog_rectus" `
             --hidden-import "matplotlib.backends.backend_tkagg" `

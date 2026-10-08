@@ -33,7 +33,7 @@ def resource_path(*parts):
 
 def exam_data_dir():
     if getattr(sys, "frozen", False):
-        return Path(os.environ.get("LOCALAPPDATA", Path.home())) / "MAMC_CAL" / "exam_data"
+        return Path(os.environ.get("LOCALAPPDATA", Path.home())) / "PharmacologyCAL" / "exam_data"
     return Path(__file__).resolve().parent.parent / "exam_data"
 
 
@@ -749,7 +749,7 @@ class CombinedExaminerDashboard:
         if not examiner_password_is_valid(master):
             master.destroy()
             return
-        master.title("MAMC CAL – Examiner Results")
+        master.title("Pharmacology CAL – Examiner Results")
         set_window_size(master, 1050, 620, 820, 480, expand_large=True)
         self.details_by_item = {}
         self.build_screen()
@@ -758,7 +758,7 @@ class CombinedExaminerDashboard:
     def build_screen(self):
         header = tk.Frame(self.master, bg="#173b57", padx=16, pady=12)
         header.pack(fill="x")
-        tk.Label(header, text="MAMC CAL Examiner Results", font=("Segoe UI", 18, "bold"),
+        tk.Label(header, text="Pharmacology CAL Examiner Results", font=("Segoe UI", 18, "bold"),
                  bg="#173b57", fg="white").pack(side="left")
         tk.Button(header, text="Refresh", command=self.load_results,
                   bg="#2b8a3e", fg="white", padx=12, pady=4).pack(side="right")

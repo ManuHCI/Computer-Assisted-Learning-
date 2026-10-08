@@ -1,4 +1,4 @@
-"""Entry point for the combined MAMC Pharmacology CAL application."""
+"""Entry point for the combined Pharmacology CAL application."""
 
 import importlib
 from pathlib import Path
@@ -37,7 +37,7 @@ def run_smoke_test():
         importlib.import_module(module_name)
 
     required_assets = (
-        ("assets", "mamc_logo.png"),
+        ("assets", "app_icon.png"),
         ("assets", "rabbit_eye", "Normal_pupil.png"),
         ("assets", "rabbit_eye", "Miosis.png"),
         ("assets", "rabbit_eye", "Mydriasis.png"),

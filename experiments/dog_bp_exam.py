@@ -23,7 +23,7 @@ EXAMINER_PASSWORD_HASH = "cfadba7271287e0b7e93524c06f6db748e79bad06754ca3b5cef14
 if getattr(sys, "frozen", False):
     DATA_DIR = os.path.join(
         os.environ.get("LOCALAPPDATA", os.path.expanduser("~")),
-        "MAMC_CAL",
+        "PharmacologyCAL",
         "exam_data",
     )
 else:
@@ -284,7 +284,7 @@ class DogBPExamMode:
             font=("Segoe UI", 20, "bold"), bg="#173b57", fg="white",
         ).pack(side="left", anchor="w")
         tk.Label(
-            title_row, text="MAMC, New Delhi", font=("Segoe UI", 8, "bold"),
+            title_row, text="Virtual Pharmacology Laboratory", font=("Segoe UI", 8, "bold"),
             bg="#173b57", fg="#cfe2f3",
         ).pack(side="right", padx=(12, 0))
         tk.Label(
@@ -368,7 +368,7 @@ class DogBPExamMode:
         tk.Label(title_row, text="Configure Unknown Test Solutions",
                  font=("Segoe UI", 17, "bold"), bg="#173b57", fg="white").pack(side="left")
         tk.Label(
-            title_row, text="MAMC, New Delhi", font=("Segoe UI", 8, "bold"),
+            title_row, text="Virtual Pharmacology Laboratory", font=("Segoe UI", 8, "bold"),
             bg="#173b57", fg="#cfe2f3",
         ).pack(side="right", padx=(12, 0))
         tk.Label(header, text=f"{self.level} practical • selections remain hidden from students",
@@ -458,7 +458,7 @@ class DogBPExamMode:
         )
         self.timer_label.pack(side="right")
         tk.Label(
-            header, text="MAMC, New Delhi", font=("Segoe UI", 8, "bold"),
+            header, text="Virtual Pharmacology Laboratory", font=("Segoe UI", 8, "bold"),
             bg="#173b57", fg="#cfe2f3",
         ).pack(side="right", padx=(8, 14))
 
@@ -949,7 +949,7 @@ class DogBPExamMode:
         tk.Label(card, text="Practical Submitted", font=("Segoe UI", 23, "bold"),
                  fg="#237032", bg="white").pack(pady=(0, 10))
         tk.Label(
-            card, text="MAMC, New Delhi", font=("Segoe UI", 8, "bold"),
+            card, text="Virtual Pharmacology Laboratory", font=("Segoe UI", 8, "bold"),
             fg="#607789", bg="white",
         ).pack(pady=(0, 4))
         tk.Label(
@@ -1013,7 +1013,7 @@ class DogBPExaminerDashboard:
         tk.Button(header, text="Refresh", command=self.load_results,
                   bg="#2b8a3e", fg="white", padx=12, pady=4).pack(side="right")
         tk.Label(
-            header, text="MAMC, New Delhi", font=("Segoe UI", 8, "bold"),
+            header, text="Virtual Pharmacology Laboratory", font=("Segoe UI", 8, "bold"),
             bg="#173b57", fg="#cfe2f3",
         ).pack(side="right", padx=(8, 14))
         columns = ("submitted", "name", "roll", "level", "score")

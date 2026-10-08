@@ -1,6 +1,6 @@
 """Acetylcholine bioassay on frog rectus abdominis.
 
-Python 3.8 compatible source for the MAMC CAL launcher.
+Python 3.8 compatible source for the Pharmacology CAL launcher.
 """
 
 import math

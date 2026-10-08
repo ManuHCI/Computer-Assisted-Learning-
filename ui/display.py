@@ -1,4 +1,4 @@
-"""High-DPI display helpers for the MAMC CAL desktop application."""
+"""High-DPI display helpers for the Pharmacology CAL desktop application."""
 
 import ctypes
 import sys

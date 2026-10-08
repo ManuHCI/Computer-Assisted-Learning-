@@ -59,7 +59,7 @@ class HomeScreen(QWidget):
         separator.setStyleSheet(f"color: {PRIMARY}; margin: 5px 25px;")
         banner_layout.addWidget(separator)
 
-        institution = QLabel("MAMC, New Delhi")
+        institution = QLabel("Virtual Pharmacology Laboratory")
         institution.setStyleSheet(f"font-size: 10px; color: {TEXT_SECONDARY};")
         institution.setAlignment(Qt.AlignCenter)
         institution.setWordWrap(True)
@@ -108,7 +108,7 @@ class HomeScreen(QWidget):
         layout.addLayout(footer)
 
         version = QLabel(
-            "Source edition 2.0  |  MBBS experimental pharmacology teaching tool  |  MAMC"
+            "Source edition 2.0  |  MBBS experimental pharmacology teaching tool"
         )
         version.setStyleSheet(f"font-size: 10px; color: {TEXT_SECONDARY};")
         version.setAlignment(Qt.AlignCenter)

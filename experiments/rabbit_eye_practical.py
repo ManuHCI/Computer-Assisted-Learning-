@@ -3,7 +3,7 @@
 =============================================================================
 RABBIT EYE EXPERIMENT SIMULATOR  (v3 — Interactive Tools)
 Computer-Assisted Learning (CAL) Software
-MAMC, New Delhi
+Virtual Pharmacology Laboratory
 
 For 2nd Year MBBS Students
 
@@ -611,7 +611,7 @@ class SplashFrame(tk.Frame):
         )
 
         c.create_text(
-            350, 470, text="MAMC, New Delhi", font=("Segoe UI", 9, "bold"),
+            350, 470, text="Virtual Pharmacology Laboratory", font=("Segoe UI", 9, "bold"),
             fill=C["text3"],
         )
 
@@ -704,7 +704,7 @@ class SetupFrame(tk.Frame):
         brand = tk.Frame(content, bg=C["bg"])
         brand.pack(fill="x", padx=24, pady=(14, 0))
         tk.Label(
-            brand, text="MAMC, New Delhi", font=("Segoe UI", 9, "bold"),
+            brand, text="Virtual Pharmacology Laboratory", font=("Segoe UI", 9, "bold"),
             bg=C["bg"], fg=C["text3"],
         ).pack(side="right")
         tk.Label(content, text="EXPERIMENT SETUP", font=("Segoe UI", 18, "bold"),
@@ -824,7 +824,7 @@ class ExperimentFrame(tk.Frame):
         actions = tk.Frame(top, bg=C["bg2"])
         actions.pack(side="right", padx=(8, 0))
         tk.Label(
-            actions, text="MAMC, New Delhi", font=("Segoe UI", 8, "bold"),
+            actions, text="Virtual Pharmacology Laboratory", font=("Segoe UI", 8, "bold"),
             bg=C["bg2"], fg=C["text3"], anchor="e",
         ).pack(fill="x", padx=3, pady=(0, 2))
         action_buttons = tk.Frame(actions, bg=C["bg2"])
@@ -1212,7 +1212,7 @@ class ExperimentFrame(tk.Frame):
             bg=C["bg2"], fg=C["gold"],
         ).pack(side="left")
         tk.Label(
-            header, text="MAMC, New Delhi", font=("Segoe UI", 8, "bold"),
+            header, text="Virtual Pharmacology Laboratory", font=("Segoe UI", 8, "bold"),
             bg=C["bg2"], fg=C["text3"],
         ).pack(side="right")
 
@@ -1364,7 +1364,7 @@ class ExperimentFrame(tk.Frame):
 
         draw.rounded_rectangle((45, 40, width - 45, 155), radius=20, fill=C["bg2"])
         draw.text((75, 62), "Rabbit Eye Comparison", font=title_font, fill=C["gold"])
-        brand = "MAMC, New Delhi"
+        brand = "Virtual Pharmacology Laboratory"
         brand_box = draw.textbbox((0, 0), brand, font=small_font)
         draw.text(
             (width - 75 - (brand_box[2] - brand_box[0]), 84), brand,
@@ -1513,7 +1513,7 @@ class ExperimentFrame(tk.Frame):
             font=("Segoe UI", 16, "bold"), bg=C["bg2"], fg=C["gold"],
         ).pack(side="left")
         tk.Label(
-            header, text="MAMC, New Delhi", font=("Segoe UI", 8, "bold"),
+            header, text="Virtual Pharmacology Laboratory", font=("Segoe UI", 8, "bold"),
             bg=C["bg2"], fg=C["text3"],
         ).pack(side="right")
 
@@ -1783,7 +1783,7 @@ class ExperimentFrame(tk.Frame):
 
         draw.rounded_rectangle((45, 35, width - 45, 150), radius=18, fill=C["bg2"])
         draw.text((72, 58), "Rabbit Eye — Session Comparison Table", font=title_font, fill=C["gold"])
-        brand = "MAMC, New Delhi"
+        brand = "Virtual Pharmacology Laboratory"
         bounds = draw.textbbox((0, 0), brand, font=small_font)
         draw.text((width - 72 - (bounds[2] - bounds[0]), 88), brand, font=small_font, fill=C["text3"])
         draw.text(
@@ -1853,7 +1853,7 @@ class ExperimentFrame(tk.Frame):
 class RabbitEyeApp:
     def __init__(self, root, image_dir=None):
         self.root = root
-        self.root.title("Rabbit Eye Experiment — MAMC, New Delhi")
+        self.root.title("Rabbit Eye Experiment — Virtual Pharmacology Laboratory")
         self.root.configure(bg=C["bg3"])
         if image_dir and os.path.isdir(image_dir):
             self.image_dir = image_dir

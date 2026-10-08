@@ -4,7 +4,7 @@
 RABBIT EYE EXPERIMENT SIMULATOR  (v3 — Interactive Tools)
 Developed by
 Computer-Assisted Learning (CAL) Software
-Department of Pharmacology, Maulana Azad Medical College, New Delhi
+Department of Pharmacology
 
 For 2nd Year MBBS Students
 
@@ -597,7 +597,7 @@ class SplashFrame(tk.Frame):
 
         c.create_text(
             680, 488,
-            text="Maulana Azad Medical College",
+            text="Virtual Pharmacology Laboratory",
             anchor="e",
             font=("Helvetica", 10),
             fill=C["text3"]
@@ -928,7 +928,7 @@ class ExperimentFrame(tk.Frame):
 class RabbitEyeApp:
     def __init__(self, root, image_dir=None):
         self.root = root
-        self.root.title("Rabbit Eye Experiment — MAMC, New Delhi")
+        self.root.title("Rabbit Eye Experiment — Virtual Pharmacology Laboratory")
         self.root.configure(bg=C["bg3"])
         if image_dir and os.path.isdir(image_dir):
             self.image_dir = image_dir

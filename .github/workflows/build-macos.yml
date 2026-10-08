@@ -67,8 +67,8 @@ jobs:
             --windowed \
             --target-arch arm64 \
             --name "Pharmacology CAL" \
-            --osx-bundle-identifier "in.ac.mamc.pharmacology-cal" \
-            --icon "assets/mamc_logo.png" \
+            --osx-bundle-identifier "org.vpl.pharmacology-cal" \
+            --icon "assets/app_icon.png" \
             --add-data "assets:assets" \
             --collect-submodules "integrated_modules.frog_rectus" \
             --collect-all "tkmacosx" \

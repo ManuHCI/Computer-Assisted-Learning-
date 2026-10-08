@@ -2,7 +2,7 @@
 
 Computer Assisted Learning for pharmacology practical teaching.
 
-This public beta includes interactive animal model experiments for students and teachers. Anyone can download and use it for teaching and learning.
+This public beta provides interactive animal-model experiments for students and teachers. It is free to download and use for teaching and learning anywhere in India, and works fully offline after download.
 
 ## Download
 
@@ -48,24 +48,21 @@ The software works offline after download.
 
 ## Public beta
 
-Public Beta • Version 1.0 • MAMC, New Delhi
+Public Beta • Version 1.0
 
 Feedback and suggestions are welcome.
 
-**Project is funded by MRU (ICMR), MAMC, Nodal Officer - Dr. Bhupinder Kalra** 
-
-## Developed by
+## Credits
 
 Designed and developed by
 
-**Dr. Manu Kumar Shetty**
+**Dr. Manu Kumar Shetty**, Professor of Pharmacology
+Department of Pharmacology, Maulana Azad Medical College, New Delhi
 
-**Professor of Pharmacology**
+Funded by MRU (ICMR), MAMC — Nodal Officer: Dr. Bhupinder Kalra
+Principal Investigator: Dr. Shalini Chawla, Director Professor, MAMC
 
-Our 2nd Yr MAMC (MBBS Batch 24) students Harsh Patel and Dhruv Marmath contributed in developing Rabbit Eye experiment. 
-
-**Maulana Azad Medical College, New Delhi**
-
+Rabbit Eye experiment contributed by students Harsh Patel and Dhruv Marmath (2nd year MBBS).
 
 [LinkedIn profile](https://www.linkedin.com/in/manukumarshetty/)
 

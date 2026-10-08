@@ -371,7 +371,7 @@ Use the same dose when comparing responses. Give the blocker before the agonist.
             font=("Segoe UI", 18, "bold"), bg="#173b57", fg="white",
         ).pack(side="left", anchor="w")
         tk.Label(
-            title_row, text="MAMC, New Delhi", font=("Segoe UI", 8, "bold"),
+            title_row, text="Virtual Pharmacology Laboratory", font=("Segoe UI", 8, "bold"),
             bg="#173b57", fg="#cfe2f3",
         ).pack(side="right", padx=(12, 0))
         self.subtitle_label = tk.Label(

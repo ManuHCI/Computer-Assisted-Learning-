@@ -28,7 +28,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle(
-            "Frog Rectus Abdominis CAL Simulator — MAMC, New Delhi"
+            "Frog Rectus Abdominis CAL Simulator — Virtual Pharmacology Laboratory"
         )
         # 720 by 480 keeps the application reachable on small Windows laptops.
         # Every page is inside a scroll area, so no button is lost below the edge.
@@ -69,7 +69,7 @@ class MainWindow(QMainWindow):
 
         self.stack.setCurrentIndex(0)
         self.statusBar().showMessage(
-            "Ready | Frog Rectus Abdominis CAL source edition | MAMC, New Delhi"
+            "Ready | Frog Rectus Abdominis CAL source edition | Virtual Pharmacology Laboratory"
         )
 
     def _add_scrollable_page(self, page):
@@ -113,7 +113,7 @@ def main(argv=None):
     app = QApplication(sys.argv if argv is None else argv)
     ensure_application_font()
     app.setApplicationName("Frog Rectus Abdominis CAL")
-    app.setOrganizationName("Department of Pharmacology, MAMC")
+    app.setOrganizationName("Department of Pharmacology")
     app.setStyleSheet(MAIN_STYLESHEET)
     window = MainWindow()
     window.showMaximized()
