@@ -186,17 +186,27 @@ def simulate_response(drug, dose_ug_kg, time, prior_drugs=None):
     explanation = "Saline control: no important pharmacological response."
 
     if drug == "Epinephrine":
-        alpha = _hill(dose, 1.3) * alpha_open
-        beta1 = _hill(dose, 0.35) * beta_open
-        beta2 = _hill(dose, 0.25) * beta_open
-        sbp_delta = (42.0 * alpha + 14.0 * beta1) * pressor - 14.0 * beta2 * delayed
-        dbp_delta = 43.0 * alpha * pressor - 31.0 * beta2 * delayed
+        # Alpha-1 is lower affinity (higher EC50) than the beta receptors, so at
+        # low doses the beta effects dominate and alpha-1 only takes over as the
+        # dose rises.
+        alpha = _hill(dose, 2.5) * alpha_open
+        beta1 = _hill(dose, 0.30) * beta_open
+        beta2 = _hill(dose, 0.22) * beta_open
+        # Alpha-1 vasoconstriction progressively masks beta-2 vasodilatation, so
+        # the depressor fall is large at low/moderate doses but nearly absent at
+        # high doses where the marked pressor response dominates.
+        dilation = beta2 * (1.0 - alpha) ** 1.1
+        # A later, more prolonged beta-2 depressor emerges after the sharp
+        # alpha-1 pressor has decayed, which makes the biphasic dip visible.
+        depressor = _profile(t, 7.0, 2.0, 16.0)
+        sbp_delta = 52.0 * alpha * pressor + 18.0 * beta1 * direct - 7.0 * dilation * depressor
+        dbp_delta = 48.0 * alpha * pressor + 2.0 * beta1 * direct - 46.0 * dilation * depressor
         reflex = 1.0 - block["muscarinic"]
-        hr_delta = 25.0 * beta1 * direct - 16.0 * alpha * reflex * delayed
+        hr_delta = 28.0 * beta1 * direct - 18.0 * alpha * reflex * delayed
         if block["alpha"] > 0.45:
             explanation = (
                 "Epinephrine after alpha blockade shows Dale's vasomotor reversal: "
-                "the pressor phase is suppressed and beta-2 vasodilatation lowers BP."
+                "the pressor phase is lost and beta-2 vasodilatation lowers mean BP."
             )
         elif block["beta"] > 0.45:
             explanation = (
@@ -205,8 +215,10 @@ def simulate_response(drug, dose_ug_kg, time, prior_drugs=None):
             )
         else:
             explanation = (
-                "Epinephrine is biphasic: an early alpha-1/beta-1 pressor phase is "
-                "followed by a beta-2 depressor phase. Dose changes their relative size."
+                "Epinephrine on MAP is dose-dependent: a low dose mainly lowers mean BP "
+                "(beta-2 vasodilatation), a moderate dose is biphasic (an alpha-1 rise then "
+                "a beta-2 fall below baseline), and a high dose gives a marked, largely "
+                "sustained pressor rise as alpha-1 vasoconstriction masks the beta-2 dip."
             )
     elif drug == "Norepinephrine":
         alpha = _hill(dose, 0.9) * alpha_open

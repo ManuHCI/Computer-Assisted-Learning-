@@ -78,7 +78,7 @@ Saline is used as a control and should not produce an important pharmacological 
 
 Interpretation
 
-The graph shows systolic blood pressure (SBP) and diastolic blood pressure (DBP) in mmHg, with heart rate on the right axis. The teaching baseline is 120/80 mmHg, giving a calculated mean arterial pressure (MAP) of about 93 mmHg. The observation log reports the maximum rise and fall in MAP rather than replacing the arterial-pressure traces with a mean-only line. The response pattern, direction, time course and effect of pretreatment help identify receptor action. These are mechanism-consistent teaching curves, not predictions for an individual animal.
+The graph shows the mean arterial pressure (MAP) in mmHg on the left axis, with heart rate on the right axis. The teaching baseline is a MAP of about 93 mmHg, calculated from a resting 120/80 mmHg. A single mean-pressure trace keeps the record simple, so the direction, size and time course of each response are easy to read. The response pattern, direction, time course and effect of pretreatment help identify receptor action. These are mechanism-consistent teaching curves, not predictions for an individual animal.
 """
 
     PRACTICAL_TEXT = """DOG BLOOD PRESSURE TEACHING PRACTICAL
@@ -89,7 +89,7 @@ To observe the effects of autonomic drugs on blood pressure and pulse rate and t
 
 Simulated setup
 
-The baseline arterial pressure is 120/80 mmHg, the calculated baseline MAP is about 93 mmHg and the baseline heart rate is 80 beats per minute. The left axis shows SBP and DBP in mmHg. The right axis shows heart rate. Each injection is recorded for 60 seconds. The observation table gives the dose and the rise/fall in calculated MAP.
+The baseline arterial pressure is 120/80 mmHg, the calculated baseline MAP is about 93 mmHg and the baseline heart rate is 80 beats per minute. The left axis shows mean arterial pressure (MAP) in mmHg. The right axis shows heart rate. Each injection is recorded for 60 seconds. The observation table gives the dose and the rise/fall in MAP.
 
 How to perform the practical
 
@@ -99,7 +99,7 @@ Allow the baseline recording to be seen. Select Saline and inject it as a contro
 
 Step 2
 
-Select a drug and enter a dose within the displayed teaching range. Catecholamines and similar agonists are entered in microgram/kg; the larger blocker and ephedrine doses are displayed in mg/kg. Observe the direction and size of the systolic, diastolic and heart-rate responses.
+Select a drug and enter a dose within the displayed teaching range. Catecholamines and similar agonists are entered in microgram/kg; the larger blocker and ephedrine doses are displayed in mg/kg. Observe the direction and size of the mean arterial pressure (MAP) and heart-rate responses.
 
 Step 3
 
@@ -131,7 +131,7 @@ Reset the preparation. Give the same dose of ephedrine repeatedly without resett
 
 Recording the observation
 
-For every injection, record the drug name, dose, maximum rise and fall in MAP, heart-rate change and the direction and time course of the response. Read the explanation below the graph. Use the complete SBP/DBP pattern and not only one value while interpreting the drug action.
+For every injection, record the drug name, dose, maximum rise and fall in MAP, heart-rate change and the direction and time course of the response. Read the explanation below the graph. For epinephrine, compare a low dose with a high dose: the MAP trace is biphasic, and as the dose increases the alpha-mediated pressor phase grows while the beta-2 depressor dip persists. Use the whole MAP time course and not only one value while interpreting the drug action.
 
 Important points
 
@@ -434,7 +434,7 @@ Use the same dose when comparing responses. Give the blocker before the agonist.
             font=("Segoe UI", 10, "bold"), bg="white", fg="#173b57",
         ).pack(side="left")
         self.peak_label = tk.Label(
-            graph_header, text="SBP: —  |  DBP: —",
+            graph_header, text="MAP: —",
             font=("Segoe UI", 8, "bold"), bg="white", fg="#607789",
         )
         self.peak_label.pack(side="right")
@@ -599,46 +599,40 @@ Use the same dose when comparing responses. Give the blocker before the agonist.
         pulse_axis = self.ax.twinx()
 
         window_end = max(self.WINDOW_DURATION, len(self.injection_history) * 60)
-        bp_min, bp_max = 40.0, 175.0
+        bp_min, bp_max = 55.0, 150.0
         pulse_min, pulse_max = 30.0, 170.0
         if self.injection_history:
             bp_values = np.concatenate([
-                np.concatenate((event["sbp_curve"], event["dbp_curve"]))
-                for event in self.injection_history
+                event["map_curve"] for event in self.injection_history
             ])
             pulse_values = np.concatenate([
                 event["hr_curve"] for event in self.injection_history
             ])
-            bp_min = min(bp_min, float(np.min(bp_values)) - 8)
-            bp_max = max(bp_max, float(np.max(bp_values)) + 8)
+            bp_min = min(bp_min, float(np.min(bp_values)) - 10)
+            bp_max = max(bp_max, float(np.max(bp_values)) + 12)
             pulse_min = min(pulse_min, float(np.min(pulse_values)) - 8)
             pulse_max = max(pulse_max, float(np.max(pulse_values)) + 8)
 
         self.ax.plot(
-            [0, window_end], [self.baseline_sbp, self.baseline_sbp],
-            color="#1769aa", alpha=0.28, linestyle=":", label="SBP",
-        )
-        self.ax.plot(
-            [0, window_end], [self.baseline_dbp, self.baseline_dbp],
-            color="#6a3d8f", alpha=0.28, linestyle=":", label="DBP",
+            [0, window_end], [self.baseline_map, self.baseline_map],
+            color="#1769aa", alpha=0.30, linestyle=":", label="Baseline MAP",
         )
         pulse_axis.plot(
             [0, window_end], [self.baseline_hr, self.baseline_hr],
             color="#d33f49", alpha=0.28, linestyle=":", label="Heart rate",
         )
+        map_label_used = False
         for event in self.injection_history:
             self.ax.plot(
-                event["time_array"], event["sbp_curve"],
-                color="#1769aa", linewidth=2,
-            )
-            self.ax.plot(
-                event["time_array"], event["dbp_curve"],
-                color="#6a3d8f", linewidth=2,
+                event["time_array"], event["map_curve"],
+                color="#1769aa", linewidth=2.4,
+                label=None if map_label_used else "Mean arterial pressure (MAP)",
             )
             self.ax.fill_between(
-                event["time_array"], event["dbp_curve"], event["sbp_curve"],
-                color="#7aa8cc", alpha=0.055,
+                event["time_array"], self.baseline_map, event["map_curve"],
+                color="#7aa8cc", alpha=0.10,
             )
+            map_label_used = True
             pulse_axis.plot(
                 event["time_array"], event["hr_curve"],
                 color="#d33f49", linewidth=1.6, linestyle="--",
@@ -654,12 +648,12 @@ Use the same dose when comparing responses. Give the blocker before the agonist.
         self.ax.set_ylim(bp_min, bp_max)
         pulse_axis.set_ylim(pulse_min, pulse_max)
         self.ax.set_title(
-            "Systolic and diastolic arterial pressure with heart rate",
+            "Mean arterial pressure (MAP) with heart rate",
             fontsize=11, color="#173b57",
         )
         self.ax.set_xlabel("Experimental time in seconds", fontsize=9)
         self.ax.set_ylabel(
-            "Blood Pressure\n(mmHg)", color="#1769aa", fontsize=8,
+            "Mean arterial pressure\n(mmHg)", color="#1769aa", fontsize=8,
         )
         pulse_axis.set_ylabel(
             "Heart rate\n(beats/min)", color="#d33f49", fontsize=8,
@@ -677,8 +671,8 @@ Use the same dose when comparing responses. Give the blocker before the agonist.
     def update_numeric_labels(self, event):
         self.peak_label.configure(
             text=(
-                f"SBP {np.min(event['sbp_curve']):.0f}–{np.max(event['sbp_curve']):.0f}  |  "
-                f"DBP {np.min(event['dbp_curve']):.0f}–{np.max(event['dbp_curve']):.0f}"
+                f"MAP {np.min(event['map_curve']):.0f}–{np.max(event['map_curve']):.0f} mmHg"
+                f"  |  ΔMAP +{event['map_rise']:.0f} / {event['map_fall']:.0f}"
             )
         )
 
@@ -696,7 +690,7 @@ Use the same dose when comparing responses. Give the blocker before the agonist.
         self.injection_history = []
         self.current_offset = 0
         self.update_continuous_graph()
-        self.peak_label.configure(text="SBP: —  |  DBP: —")
+        self.peak_label.configure(text="MAP: —")
         self.update_explanation(
             "Preparation reset to baseline. Earlier blocker and drug effects have been removed."
         )

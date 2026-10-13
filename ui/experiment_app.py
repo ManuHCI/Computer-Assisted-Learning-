@@ -39,7 +39,7 @@ Epinephrine, also called adrenaline, stimulates alpha and beta receptors. Its in
 
 EXPERIMENTAL SETUP
 
-The virtual dog is anaesthetised. A cannula in the carotid artery is connected to a pressure transducer. A venous cannula is used for giving drugs. The graph shows separate systolic and diastolic pressure traces in mmHg and heart rate with time. Calculated mean-pressure changes are reported in the observation log.
+The virtual dog is anaesthetised. A cannula in the carotid artery is connected to a pressure transducer. A venous cannula is used for giving drugs. The graph shows a single mean arterial pressure (MAP) trace in mmHg with heart rate against time. The rise and fall in MAP are reported in the observation log.
 
 PRACTICAL PROCEDURE
 

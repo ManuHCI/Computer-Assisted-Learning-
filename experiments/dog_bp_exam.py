@@ -786,39 +786,37 @@ class DogBPExamMode:
         self.ax.clear()
         pulse_axis = self.ax.twinx()
         window_end = max(60, len(history) * 60)
-        bp_min, bp_max = 40.0, 175.0
+        bp_min, bp_max = 55.0, 150.0
         pulse_min, pulse_max = 30.0, 170.0
         if history:
-            bp_values = np.concatenate([
-                np.concatenate((event["sbp"], event["dbp"])) for event in history
-            ])
+            bp_values = np.concatenate([event["map"] for event in history])
             pulse_values = np.concatenate([event["pulse"] for event in history])
-            bp_min = min(bp_min, float(np.min(bp_values)) - 8.0)
-            bp_max = max(bp_max, float(np.max(bp_values)) + 8.0)
+            bp_min = min(bp_min, float(np.min(bp_values)) - 10.0)
+            bp_max = max(bp_max, float(np.max(bp_values)) + 12.0)
             pulse_min = min(pulse_min, float(np.min(pulse_values)) - 8.0)
             pulse_max = max(pulse_max, float(np.max(pulse_values)) + 8.0)
-        baseline_sbp = self.response_model.baseline_sbp
-        baseline_dbp = self.response_model.baseline_dbp
+        baseline_map = (self.response_model.baseline_sbp
+                        + 2.0 * self.response_model.baseline_dbp) / 3.0
         baseline_hr = self.response_model.baseline_hr
         self.ax.plot(
-            [0, window_end], [baseline_sbp, baseline_sbp],
-            color="#1769aa", alpha=0.25, linestyle=":", label="SBP",
-        )
-        self.ax.plot(
-            [0, window_end], [baseline_dbp, baseline_dbp],
-            color="#6a3d8f", alpha=0.25, linestyle=":", label="DBP",
+            [0, window_end], [baseline_map, baseline_map],
+            color="#1769aa", alpha=0.30, linestyle=":", label="Baseline MAP",
         )
         pulse_axis.plot(
             [0, window_end], [baseline_hr, baseline_hr],
             color="#d33f49", alpha=0.25, linestyle=":", label="Heart rate",
         )
+        map_label_used = False
         for event in history:
-            self.ax.plot(event["time"], event["sbp"], color="#1769aa", linewidth=2)
-            self.ax.plot(event["time"], event["dbp"], color="#6a3d8f", linewidth=2)
-            self.ax.fill_between(
-                event["time"], event["dbp"], event["sbp"],
-                color="#7aa8cc", alpha=0.055,
+            self.ax.plot(
+                event["time"], event["map"], color="#1769aa", linewidth=2.4,
+                label=None if map_label_used else "Mean arterial pressure (MAP)",
             )
+            self.ax.fill_between(
+                event["time"], baseline_map, event["map"],
+                color="#7aa8cc", alpha=0.10,
+            )
+            map_label_used = True
             pulse_axis.plot(event["time"], event["pulse"], color="#d33f49",
                             linewidth=1.6, linestyle="--")
             start = float(event["time"][0])
@@ -829,12 +827,12 @@ class DogBPExamMode:
         self.ax.set_ylim(bp_min, bp_max)
         pulse_axis.set_ylim(pulse_min, pulse_max)
         self.ax.set_title(
-            f"Unknown {self.active_test + 1}: systolic/diastolic BP and heart rate",
+            f"Unknown {self.active_test + 1}: mean arterial pressure and heart rate",
             fontsize=11, color="#173b57",
         )
         self.ax.set_xlabel("Experimental time (seconds)", fontsize=9)
         self.ax.set_ylabel(
-            "BP (mmHg)", color="#1769aa", fontsize=8,
+            "Mean arterial pressure (mmHg)", color="#1769aa", fontsize=8,
         )
         pulse_axis.set_ylabel(
             "HR (beats/min)", color="#d33f49", fontsize=8,
@@ -864,13 +862,12 @@ class DogBPExamMode:
             event = history[-1]
             self.peak_label.config(
                 text=(
-                    f"SBP {np.min(event['sbp']):.0f}–{np.max(event['sbp']):.0f}   "
-                    f"DBP {np.min(event['dbp']):.0f}–{np.max(event['dbp']):.0f}   "
+                    f"MAP {np.min(event['map']):.0f}–{np.max(event['map']):.0f} mmHg   "
                     f"ΔMAP +{event['map_rise']:.1f} / {event['map_fall']:.1f}"
                 )
             )
         else:
-            self.peak_label.config(text="SBP: —   DBP: —   MAP change: —")
+            self.peak_label.config(text="MAP: —   MAP change: —")
 
     def submit_exam(self):
         answers = [variable.get() for variable in self.answer_vars]
